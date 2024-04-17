@@ -2,6 +2,8 @@
 
 PenPerfect is an AI-powered text editing platform that refines and enhances your writing. Perfect your prose, elevate your essays, and create masterpieces with ease. Try PenPerfect now for flawless writing.
 
+![Screenshot](screenshots/penperfect.png)
+
 ## Introduction
 
 PenPerfect is a cutting-edge text editing platform that leverages the power of artificial intelligence to help you refine and enhance your writing. Whether you're a student, a professional writer, or someone who simply wants to improve their communication skills, PenPerfect is here to assist you.

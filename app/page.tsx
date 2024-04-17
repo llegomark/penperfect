@@ -184,14 +184,8 @@ export default function Home() {
 
 	const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newApiKey = e.target.value;
-		if (newApiKey.startsWith("sk")) {
-			setApiKey(newApiKey);
-			localStorage.setItem(API_KEY_STORAGE_KEY, newApiKey);
-		} else {
-			setApiKey("");
-			localStorage.removeItem(API_KEY_STORAGE_KEY);
-			toast.error("Invalid API key. The key should start with 'sk'.");
-		}
+		setApiKey(newApiKey);
+		localStorage.setItem(API_KEY_STORAGE_KEY, newApiKey);
 	};
 
 	return (
