@@ -201,6 +201,7 @@ export default function Home() {
 						className="rounded-lg drop-shadow-sm bg-gray-100 border border-gray-200 px-4 py-2 pr-10 dark:bg-gray-900 dark:border-gray-800 w-full h-[430px] focus:outline-none focus:border-blue-300 dark:focus:border-blue-700 transition-colors resize-none whitespace-pre-wrap overflow-auto text-sm font-mono mb-4"
 						placeholder="Paste or type your text here..."
 						aria-label="Text"
+						required
 					/>
 					<button
 						type="button"
@@ -274,7 +275,6 @@ export default function Home() {
 							className="absolute top-2 right-2 p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
 							onClick={handleCopy}
 							aria-label="Copy"
-						// style={{ right: "calc(0.5rem + 16px)" }}
 						>
 							<CopyIcon className="text-gray-600 dark:text-gray-400" />
 						</button>
