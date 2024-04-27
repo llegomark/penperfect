@@ -48,8 +48,12 @@ export default function RootLayout({
 
 				<footer className="text-center text-sm dark:text-gray-400 text-gray-600 font-mono">
 					<p>
-						<A href="https://github.com/llegomark">github</A> /{" "}
-						<A href="https://llego.dev">llego.dev</A> | crafted with ☕ in antipolo city
+						<A href="https://github.com/llegomark/penperfect" target="_blank" rel="noopener noreferrer">github</A> |{" "}
+						<A href="https://llego.dev" target="_blank" rel="noopener noreferrer">llego.dev</A> |{" "}
+						<A href="https://ai.meta.com/blog/meta-llama-3/" target="_blank" rel="noopener noreferrer">claude-3-haiku-20240307</A>
+					</p>
+					<p>
+						crafted with ☕ in antipolo city
 					</p>
 				</footer>
 			</body>
