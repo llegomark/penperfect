@@ -97,9 +97,9 @@ export default function Home() {
 			oldSentences.forEach((sentence, index) => {
 				const newSentence = newSentences[index];
 				if (sentence !== newSentence) {
-					diffHtml += `<span class="bg-red-200">${sentence}</span>`;
+					diffHtml += `<span class="bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200">${sentence}</span>`;
 					if (newSentence) {
-						diffHtml += `<span class="bg-green-200">${newSentence}</span>`;
+						diffHtml += `<span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200">${newSentence}</span>`;
 					}
 				} else {
 					diffHtml += sentence;
@@ -107,7 +107,7 @@ export default function Home() {
 				diffHtml += " ";
 			});
 			if (newSentences.length > oldSentences.length) {
-				diffHtml += `<span class="bg-green-200">${newSentences
+				diffHtml += `<span class="bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200">${newSentences
 					.slice(oldSentences.length)
 					.join(" ")}</span>`;
 			}
@@ -120,7 +120,7 @@ export default function Home() {
 			const diffResult = diffWords(oldText, newText);
 			let diffHtml = "";
 			diffResult.forEach((part) => {
-				const color = part.added ? "bg-green-200" : part.removed ? "bg-red-200" : "";
+				const color = part.added ? "bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200" : part.removed ? "bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200" : "";
 				diffHtml += `<span class="${color}">${part.value}</span>`;
 			});
 			return diffHtml;
