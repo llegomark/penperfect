@@ -50,7 +50,7 @@ export default function RootLayout({
 					<p>
 						<A href="https://github.com/llegomark/penperfect" target="_blank" rel="noopener noreferrer">github</A> |{" "}
 						<A href="https://llego.dev" target="_blank" rel="noopener noreferrer">llego.dev</A> |{" "}
-						<A href="https://ai.meta.com/blog/meta-llama-3/" target="_blank" rel="noopener noreferrer">claude-3-haiku-20240307</A>
+						<A href="https://docs.anthropic.com/claude/docs/models-overview" target="_blank" rel="noopener noreferrer">claude-3-haiku-20240307</A>
 					</p>
 					<p>
 						crafted with ☕ in antipolo city
