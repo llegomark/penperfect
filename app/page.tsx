@@ -7,7 +7,7 @@ import { diffWords } from "diff";
 import debounce from "lodash/debounce";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-const API_KEY_STORAGE_KEY = "anthropic_api_key";
+const API_KEY_STORAGE_KEY = "groq_api_key";
 const WORD_COUNT_LIMIT = 5000;
 
 export default function Home() {
@@ -222,7 +222,7 @@ export default function Home() {
 					<ol className="list-decimal list-inside text-gray-500 dark:text-gray-400">
 						<li>Enter or paste your text in the input box above (maximum {WORD_COUNT_LIMIT} words).</li>
 						<li>Provide a prompt or instruction in the input field below the text box.</li>
-						<li>Enter your Anthropic API key in the input field below the instructions.</li>
+						<li>Enter your Groq API key in the input field below the instructions.</li>
 						<li>Click the submit button to generate the AI-powered response.</li>
 						<li>The AI-generated response will appear in the text box on the right.</li>
 						<li>The differences between your original text and the AI response will be highlighted in the boxes below.</li>
@@ -234,7 +234,7 @@ export default function Home() {
 						value={apiKey}
 						onChange={handleApiKeyChange}
 						className="rounded-lg drop-shadow-sm bg-gray-100 border border-gray-200 px-4 py-2 dark:bg-gray-900 dark:border-gray-800 w-full focus:outline-none focus:border-blue-300 dark:focus:border-blue-700 transition-colors text-sm font-mono"
-						placeholder="Paste your Anthropic API key"
+						placeholder="Paste your Groq API key"
 						aria-label="API Key"
 					/>
 					<p className="mt-2 text-sm text-gray-500 dark:text-gray-400">

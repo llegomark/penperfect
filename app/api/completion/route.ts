@@ -1,9 +1,7 @@
-import Anthropic from "@anthropic-ai/sdk";
-import { AnthropicStream, StreamingTextResponse } from "ai";
+import OpenAI from "openai";
+import { OpenAIStream, StreamingTextResponse } from "ai";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
-
-export const runtime = "edge";
 
 const ratelimit =
   process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
@@ -17,35 +15,35 @@ const ratelimit =
     })
     : false;
 
+const groq = new OpenAI({
+  apiKey: process.env.GROQ_API_KEY!,
+  baseURL: "https://api.groq.com/openai/v1",
+});
+
 export async function POST(req: Request) {
   if (ratelimit) {
     const ip = req.headers.get("CF-Connecting-IP") ?? "local";
     const rl = await ratelimit.limit(ip);
+
     if (!rl.success) {
       return new Response("Rate limit exceeded", { status: 429 });
     }
   }
 
   const { text, prompt, apiKey } = await req.json();
-
   if (!prompt) return new Response("Prompt is required", { status: 400 });
 
-  const anthropicApiKey = apiKey || process.env.ANTHROPIC_API_KEY;
+  groq.apiKey = apiKey || process.env.GROQ_API_KEY!;
 
-  if (!anthropicApiKey) {
-    return new Response("API key is required", { status: 400 });
-  }
-
-  const anthropic = new Anthropic({ apiKey: anthropicApiKey });
-
-  const response = await anthropic.messages.create({
-    model: "claude-3-haiku-20240307",
+  const response = await groq.chat.completions.create({
+    model: "llama3-8b-8192",
     stream: true,
-    max_tokens: 4096,
+    max_tokens: 8192,
+    temperature: 1,
     messages: [
       {
-        role: "user",
-        content: `You are Claude, an AI assistant created by Anthropic to be an exceptional text editor, world-class writer, thorough grammar checker, skilled researcher, creative brainstormer, and versatile content creator. Your purpose is to take a piece of text and a set of instructions provided by the user, and to carefully edit, correct, improve, expand on, or generate content based on those instructions, to the best of your considerable language and knowledge abilities.
+        role: "system",
+        content: `You are Llama, an AI assistant created by Meta to be an exceptional text editor, world-class writer, thorough grammar checker, skilled researcher, creative brainstormer, and versatile content creator. Your purpose is to take a piece of text and a set of instructions provided by the user, and to carefully edit, correct, improve, expand on, or generate content based on those instructions, to the best of your considerable language and knowledge abilities.
 
         Here is the prompt you should edit the text to match: 
 
@@ -73,9 +71,13 @@ export async function POST(req: Request) {
         
         Remember, as an AI with strong language and knowledge abilities, your goal is to be an exceptional editor, writer, brainstormer, researcher and content creator. Carefully follow the user's instructions in the <prompt> to improve or generate text to the best of your abilities. Preserve original meaning while enhancing clarity, coherence, grammar, style, substance and creativity as needed. Adapt your writing to the specified purpose, audience and format.`,
       },
+      {
+        role: "user",
+        content: `Prompt: ${prompt}\nText: ${text}`,
+      },
     ],
   });
 
-  const stream = AnthropicStream(response);
+  const stream = OpenAIStream(response);
   return new StreamingTextResponse(stream);
 }
